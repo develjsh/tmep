@@ -1,7 +1,7 @@
 title: Developer
 subtitle: A Portfolio Jekyll Theme Built for Developers
 description: >- # this means to ignore newlines until "baseurl:"
-  devlopr-jekyll is a beautiful Jekyll Theme Built For Developers, which is optimized for speed and readability.
+  A joyful developer who finds pleasure in learning each day.
 
 url: "https://develjsh.github.io" # the base hostname & protocol for your site, e.g. https://example.github.io
 baseurl: "" # the subpath of your site, e.g. /blog
@@ -23,7 +23,7 @@ urls:
 
 
 # Edit Author details (For multi authors check _data/authors.yml)
-
+# About
 author_logo: profile.png
 author: SeungHwan Jung
 author_bio: Hi, my name is SeungHwan Jung.

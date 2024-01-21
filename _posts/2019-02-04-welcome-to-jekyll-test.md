@@ -29,7 +29,7 @@ print_hi('Tom')
 or
 
 ```javascript
-var a = 1;
+var a = 3;
 var b = 2;
 function sum (num1,num2){
   return num1+num2;

@@ -31,7 +31,3 @@ permalink: /blog/categories/big_data/
  <li class="category-posts"><span>{{ post.date | date_to_string }}</span> &nbsp; <a href="{{ post.url }}">{{ post.title }}</a></li>
 {% endfor %}
 </div>
-```
-
-Using the category, all the posts associated with the category will be listed on
-`http://localhost:4000/blog/categories/big_data`

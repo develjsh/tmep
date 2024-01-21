@@ -23,6 +23,7 @@ layout: page
 title: Guides
 permalink: /blog/categories/big_data/
 ---
+```
 
 <h5> Posts by Category : {{ page.title }} </h5>
 

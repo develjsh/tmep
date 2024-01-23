@@ -15,9 +15,3 @@ permalink: /blog/adding-categories-tags-in-posts/
 ## 0강. 고가용성 Hadoop 클러스터 환경 구축합니다.
 - 총 5개의(nn1, nn2, dn1, dn2, dn3) vm 이 필요합니다.
 
-
-<div class="card">
-{% for post in site.categories.big_data %}
- <li class="category-posts"><span>{{ post.date | date_to_string }}</span> &nbsp; <a href="{{ post.url }}">{{ post.title }}</a></li>
-{% endfor %}
-</div>

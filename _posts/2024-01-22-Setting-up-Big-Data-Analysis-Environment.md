@@ -15,6 +15,7 @@ permalink: /blog/adding-categories-tags-in-posts/
 ## 0강. 고가용성 Hadoop 클러스터 환경 구축합니다.
 - 총 5개의(nn1, nn2, dn1, dn2, dn3) vm 이 필요합니다.
 
+
 ## 1강. GCP VM 인스턴스 배포
 
 1. Compute Engine 을 클릭 후 인스턴스 만들기를 클릭합니다.
@@ -51,6 +52,7 @@ permalink: /blog/adding-categories-tags-in-posts/
     VM 인스턴스를 정지 후 새로 시작하면 외부 IP 주소가 바뀌기 때문에 재실행 시 config 설정 값도 수정해줘야 합니다.
 
 6. ssh nn1 을 터미널에 입력 후 실행해 Server 에 연결 되는지 확인합니다.
+
 
 ## 2강. Java 설치 및 환경설정
 
@@ -93,6 +95,7 @@ permalink: /blog/adding-categories-tags-in-posts/
     복사 붙여넣기 하게 되면 ‘ 값이 잘못 들어갈 수 있어 한 번 더 확인해봐야합니다.
     
 7. > env | grep JAVA 를 통해서 JAVA_HOME 이 export 되고 있는지 확인할 수 있습니다.
+
 
 # 3강. Hadoop 설치 및 환경설정
 
@@ -339,6 +342,7 @@ permalink: /blog/adding-categories-tags-in-posts/
     nn1
     nn2
     ```
+
 
 # 4강. Spark 설치 및 환경설정
 

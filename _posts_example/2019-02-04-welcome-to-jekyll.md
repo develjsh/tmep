@@ -28,6 +28,7 @@ print_hi('Tom')
 
 or
 
+
 ```javascript
 var a = 1;
 var b = 2;

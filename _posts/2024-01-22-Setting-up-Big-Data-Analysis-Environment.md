@@ -339,3 +339,119 @@ permalink: /blog/adding-categories-tags-in-posts/
     nn1
     nn2
     ```
+
+# 4강. Spark 설치 및 환경설정
+
+1. Apache Spark 3.3.3 설치 및 압축 해제를 해줍니다.
+    
+    ```bash
+    $ sudo wget https://dlcdn.apache.org/spark/spark-3.4.2/spark-3.4.2-bin-hadoop3.tgz
+    
+    $ sudo tar -xzvf spark-3.4.2-bin-hadoop3.tgz -C /usr/local
+    
+    $ sudo mv /usr/local/spark-3.4.2-bin-hadoop3 /usr/local/spark
+    ```
+    
+2. Python3 설치 및 파이썬 라이브러리 설치 해줍니다.
+    
+    ```bash
+    # Python 설치
+    $ sudo apt-get install -y python3-pip
+    # Python 버전 확인
+    $ python3 -V
+    #2024.01.25 기분 Python 3.8.10
+    # PySpark 설치
+    $ sudo pip3 install pyspark findspark
+    ```
+    
+3. Spark 환경 변수 설정을 해줍니다.
+    
+    ```bash
+    # Hadoop 시스템 환경변수 설정
+    sudo vim /etc/environment
+    
+    # 아래 내용 추가 후 저장
+    PATH 뒤에 ":/usr/local/spark/bin" 추가
+    PATH 뒤에 ":/usr/local/spark/sbin" 추가
+    SPARK_HOME="/usr/local/spark"
+    
+    # 시스템 환경변수 활성화
+    $ source /etc/environment
+    
+    #  Spark 사용자 환경변수 설정
+    $ echo 'export SPARK_HOME=/usr/local/spark' >> ~/.bashrc
+    
+    # 사용자 환경변수 활성화
+    $ source ~/.bashrc
+    ```
+    
+4. spark-env.sh 파일을 편집해줍니다.
+    
+    ```bash
+    #터미널에서 입력해줍니다.
+    $ cd $SPARK_HOME/conf
+    $ ls 
+    $ sudo cp spark-env.sh.template spark-env.sh
+    $ sudo vi spark-env.sh
+    
+    #맨 아래로 이동합니다.
+    export SPARK_HOME=/usr/local/spark
+    export SPARK_CONF_DIR=/usr/local/spark/conf
+    export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+    export HADOOP_HOME=/usr/local/hadoop
+    export HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop
+    export SPARK_MASTER_WEBUI_PORT=18080
+    ```
+    
+5. spark-defaults.conf 파일을 편집해줍니다.
+    
+    ```bash
+    #터미널에서 입력해줍니다.
+    $ sudo cp spark-defaults.conf.template spark-defaults.conf
+    $ sudo vi spark-defaults.conf
+    
+    #맨 아래로 이동합니다.
+    spark.master  yarn
+    spark.eventLog.enabled  true
+    spark.eventLog.dir  /usr/local/spark/logs
+    #저장 후 나옵니다
+    
+    #터미널에서 입력해줍니다.
+    $ sudo mkdir -p /usr/local/spark/logs
+    $ sudo chown -R $USER:$USER /usr/local/spark/
+    $ cd /usr/local/spark
+    $ ls -al
+    ```
+    
+6. workers.template 파일을 편집해줍니다.
+    
+    ```bash
+    #터미널에서 입력해줍니다.
+    $ cd /usr/local/spark/conf
+    $ sudo cp workers.template workers
+    $ vi workers
+    
+    #맨 아래로 이동해줍니다.
+    #localhost 는 주석 처리해줍니다.
+    #아래 내용을 추가해줍니다.
+    dn1
+    dn2
+    dn3
+    ```
+    
+7. 파이썬 환경 설정을 추가해줍니다
+    
+    ```bash
+    $ sudo vi /etc/environment
+    
+    # 아래 내용 추가 후 저장
+    PATH 뒤에 ":/usr/bin/python3" 추가
+    
+    # 시스템 환경변수 활성화
+    $ source /etc/environment
+    
+    $ sudo echo 'export PYTHONPATH=/usr/bin/python3' >> ~/.bashrc
+    $ sudo echo 'export PYSPARK_PYTHON=/usr/bin/python3' >> ~/.bashrc
+    
+    $ source ~/.bashrc
+    ```

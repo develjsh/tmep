@@ -44,8 +44,8 @@ layout: default
     <div id="author_projects" class="card">
       <h1 class="card-title">Projects</h1>
       <br />
-      {% for project in site.author_project_details %} {% if project.visibility
-      == true %}
+      {% for project in site.author_project_details %} 
+      {% if project.visibility == true %}
       <div class="row" id="project-card">
         <div class="col-md-6">
           <img
@@ -62,6 +62,8 @@ layout: default
           </p>
         </div>
       </div>
+      {% endfor %}
+      {% endif %}
     </div>
     <div class="card">
       <h1 class="card-title">Work Experience</h1>

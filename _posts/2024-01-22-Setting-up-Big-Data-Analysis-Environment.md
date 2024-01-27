@@ -15,7 +15,6 @@ permalink: /blog/adding-categories-tags-in-posts/
 ## 0강. 고가용성 Hadoop 클러스터 환경 구축합니다.
 - 총 5개의(nn1, nn2, dn1, dn2, dn3) vm 이 필요합니다.
 
-
 ## 1강. GCP VM 인스턴스 배포
 
 1. Compute Engine 을 클릭 후 인스턴스 만들기를 클릭합니다.

@@ -12,6 +12,7 @@ layout: default
       <p class="profile-bio">{{ site.subtitle }}</p>
       {% if site.github_username %} {%- include github_follow_button.html -%} {%
       endif %}
+
       <p class="profile-links"></p>
       {% if site.author_location %}
       <h6><a href="https://www.google.com/maps/search/?api=1&query={{ site.author_location }}" class="social-link"><i class="fas fa-map-marker-alt"></i> {{ site.author_location }}</a></h6>
@@ -26,6 +27,7 @@ layout: default
       <h1>Hard Skills</h1>
       {%- include author_skills.html -%}
     </div>
+
     {% if site.wakatime_username %}
     <div class="card">
       <h1>Soft Skills</h1>
@@ -50,6 +52,7 @@ layout: default
       <h1 class="card-title">Education</h1>
       <br />
     </div>
+    {% endif %}
   </div>
 </div>
 </div>

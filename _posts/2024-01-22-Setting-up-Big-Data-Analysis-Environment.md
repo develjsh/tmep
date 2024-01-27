@@ -10,9 +10,9 @@ tags: big_data
 usemathjax: false
 permalink: /blog/adding-categories-tags-in-posts/
 ---
-## Setting up Big Data Analysis Environment
+# Setting up Big Data Analysis Environment
 
-### 0강. 고가용성 Hadoop 클러스터 환경 구축합니다.
+## 0강. 고가용성 Hadoop 클러스터 환경 구축합니다.
 - 총 5개의(nn1, nn2, dn1, dn2, dn3) vm 이 필요합니다.
 
 ## 1강. GCP VM 인스턴스 배포
@@ -96,7 +96,7 @@ permalink: /blog/adding-categories-tags-in-posts/
 7. > env | grep JAVA 를 통해서 JAVA_HOME 이 export 되고 있는지 확인할 수 있습니다.
 
 
-# 3강. Hadoop 설치 및 환경설정
+## 3강. Hadoop 설치 및 환경설정
 
 1. Hadoop 설치 해줍니다.
     
@@ -343,7 +343,7 @@ permalink: /blog/adding-categories-tags-in-posts/
     ```
 
 
-# 4강. Spark 설치 및 환경설정
+## 4강. Spark 설치 및 환경설정
 
 1. Apache Spark 3.3.3 설치 및 압축 해제를 해줍니다.
     

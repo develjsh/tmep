@@ -55,7 +55,7 @@ hero_cover_img: sample_cover.jpg # replace this for changing homepage cover (eg.
 
 # Projects
 author_project_details:
-              - project_thumbnail: 
+              - project_thumbnail: big-data.jpg
                 project_title: Setting up Big Data Analysis Environment
                 project_description: Setting up Big Data Analysis Environment
                 project_url: 

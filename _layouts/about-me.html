@@ -47,7 +47,7 @@ layout: default
       {% for project in site.author_project_details %} 
       {% if project.visibility == true %}
       <div class="row" id="project-card">
-        <div class="col-md-6">
+        <div class="col-md-3">
           <img
             src="{{site.url}}{{site.baseurl}}/assets/img/{{project.project_thumbnail}}"
             class="project-img"
@@ -71,7 +71,7 @@ layout: default
       {% for project in site.author_sids_project_details %} 
       {% if project.visibility == true %}
       <div class="row" id="project-card">
-        <div class="col-md-6">
+        <div class="col-md-3">
           <img
             src="{{site.url}}{{site.baseurl}}/assets/img/{{project.project_thumbnail}}"
             class="project-img"

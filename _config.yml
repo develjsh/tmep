@@ -56,11 +56,18 @@ hero_cover_img: sample_cover.jpg # replace this for changing homepage cover (eg.
 # Projects
 author_project_details:
               - project_thumbnail: big-data.jpg
+                project_title: Collect NCP metrics
+                project_description: Collect server, vpc, network, load balaner, cpu, disk, memory metrics
+                project_url: 
+                visibility: true
+
+# Projects
+author_sids_project_details:
+              - project_thumbnail: big-data.jpg
                 project_title: Setting up Big Data Analysis Environment
                 project_description: Setting up Big Data Analysis Environment
                 project_url: 
                 visibility: true
-
 # social links
 github_username: develjsh
 

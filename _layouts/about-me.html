@@ -10,9 +10,9 @@ layout: default
       </a>
       <h1 class="profile-name">{{ site.title }}</h1>
       <p class="profile-bio">{{ site.subtitle }}</p>
-      {% if site.github_username %} {%- include github_follow_button.html -%} {%
-      endif %}
-
+      {% if site.github_username %} 
+        {%- include github_follow_button.html -%} 
+      {% endif %}
       <p class="profile-links"></p>
       {% if site.author_location %}
       <h6><a href="https://www.google.com/maps/search/?api=1&query={{ site.author_location }}" class="social-link"><i class="fas fa-map-marker-alt"></i> {{ site.author_location }}</a></h6>
@@ -45,6 +45,30 @@ layout: default
       <h1 class="card-title">Projects</h1>
       <br />
       {% for project in site.author_project_details %} 
+      {% if project.visibility == true %}
+      <div class="row" id="project-card">
+        <div class="col-md-6">
+          <img
+            src="{{site.url}}{{site.baseurl}}/assets/img/{{project.project_thumbnail}}"
+            class="project-img"
+          />
+        </div>
+        <div class="col-md-4 center">
+          <h4 class="experience-title">{{ project.project_title }}</h4>
+          <h6 class="experience-info">{{ project.project_info}}</h6>
+          <p class="experience-desc">{{ project.project_description }}</p>
+          <p>
+            <a class="project-link" href="{{project.project_url}}">{{ project.project_url}}</a>
+          </p>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+    <div class="card">
+      <h1 class="card-title">Side Project</h1>
+      <br />
+      {% for project in site.author_sids_project_details %} 
       {% if project.visibility == true %}
       <div class="row" id="project-card">
         <div class="col-md-6">

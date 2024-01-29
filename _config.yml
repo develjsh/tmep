@@ -61,11 +61,11 @@ author_project_details:
                 project_url: 
                 visibility: true
 
-# Projects
+# Side Projects
 author_sids_project_details:
               - project_thumbnail: big-data.jpg
                 project_title: Setting up Big Data Analysis Environment
-                project_description: Setting up Big Data Analysis Environment
+                project_description: GCP, Java, Hadoop, Spark, Zookeeper
                 project_url: 
                 visibility: true
 # social links

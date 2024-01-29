@@ -458,3 +458,57 @@ permalink: /blog/adding-categories-tags-in-posts/
     
     $ source ~/.bashrc
     ```
+
+## 5강. Zookeeper 설치 및 환경 설정
+
+1. 설치합니다.
+    
+    ```bash
+    $ cd /install_dir
+    $ sudo wget https://dlcdn.apache.org/zookeeper/zookeeper-3.8.3/apache-zookeeper-3.8.3-bin.tar.gz
+    $ sudo tar -xzvf apache-zookeeper-3.8.3-bin.tar.gz -C /usr/local/zookeeper
+    $ sudo vi /etc/environment
+    
+    # 아래 내용 추가 후 저장
+    ZOOKEEPER_HOME="/usr/local/zookeeper"
+    
+    # 시스템 환경변수 활성화
+    $ source /etc/environment
+    $ sudo echo 'export ZOOKEEPER_HOME=/usr/local/zookeeper' >> ~/.bashrc
+    $ source ~/.bashrc
+    
+    ```
+    
+2. zookeeper 환경 설정 파일을 설정해줍니다.
+    
+    ```bash
+    $ cd $ZOOKEEPER_HOME
+    $ sudo cp ./conf/zoo_sample.cfg ./conf/zoo.cfg
+    $ sudo vi ./conf/zoo.cfg
+    
+    #기존에 존재하는 dataDir 은 주석 처리합니다.
+    dataDir=/usr/local/zookeeper/data
+    dataLogDir=/usr/local/zookeeper/logs
+    
+    #clientPort 아래에 추가해주고 저장합니다.
+    maxClientCnsns=0
+    maxSessionTimeout=180000
+    server.1=nn1:2888:3888
+    server.2=nn2:2888:3888
+    server.3=dn1:2888:3888
+    
+    #터미널에서 입력해줍니다.
+    $ sudo mkdir -p /usr/local/zookeeper/data
+    $ sudo mkdir -p /usr/local/zookeeper/logs
+    $ sudo chown -R $USER:$USER /usr/local/zookeeper
+    $ sudo vi /usr/local/zookeeper/data/myid
+    ```
+    
+3. Cluster 구성 후 Node 끼리 ssh 비밀번호 없이 연결할 수 있도록 설정합니다.
+    
+    ```bash
+    #터미널에서 입력합니다.
+    $ ssh-keygen -t rsa
+    $ cat >> ~/.ssh/authorized_keys < ~/.ssh/id_rsa.pub
+    $ ssh localhost
+    ```

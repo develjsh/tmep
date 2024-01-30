@@ -528,38 +528,39 @@ permalink: /blog/adding-categories-tags-in-posts/
 5. 5개의 머신이 통신할 수 있도록 보안그룹을 수정합니다.
     **GC 방화벽은 기본적으로 다 열려 있는 상태인지 따로 작업을 하지 않았습니다.
 
-# 7강. SSH 및 호스트 이름 설정
+
+## 7강. SSH 및 호스트 이름 설정
 
 1. ssh config 파일을 편집합니다.
-    
+
     ```python
     #ssh config 파일을 편집합니다.
     $ vi ~/ssh/config
-    
+
     Host nn1
-    	HostName ~
-    	User ~
-    	IdentifyFile <>
-    
+        HostName ~
+        User ~
+        IdentifyFile <>
+
     Host nn2
-    	HostName ~
-    	User ~
-    	IdentifyFile ~
-    
+        HostName ~
+        User ~
+        IdentifyFile ~
+
     Host dn1
-    	HostName ~
-    	User ~
-    	IdentifyFile ~
-    
+        HostName ~
+        User ~
+        IdentifyFile ~
+
     Host dn2
-    	HostName ~
-    	User ~
-    	IdentifyFile ~
-    
+        HostName ~
+        User ~
+        IdentifyFile ~
+
     Host dn3
-    	HostName ~
-    	User ~
-    	IdentifyFile ~
+        HostName ~
+        User ~
+        IdentifyFile ~
     ```
     
 2. nn1 서버로 접속하여 /etc/hosts 파일을 변경해줍니다.

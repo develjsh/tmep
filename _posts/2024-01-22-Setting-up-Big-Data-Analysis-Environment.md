@@ -527,3 +527,75 @@ permalink: /blog/adding-categories-tags-in-posts/
     
 5. 5개의 머신이 통신할 수 있도록 보안그룹을 수정합니다.
     **GC 방화벽은 기본적으로 다 열려 있는 상태인지 따로 작업을 하지 않았습니다.
+
+# 7강. SSH 및 호스트 이름 설정
+
+1. ssh config 파일을 편집합니다.
+    
+    ```python
+    #ssh config 파일을 편집합니다.
+    $ vi ~/ssh/config
+    
+    Host nn1
+    	HostName ~
+    	User ~
+    	IdentifyFile <>
+    
+    Host nn2
+    	HostName ~
+    	User ~
+    	IdentifyFile ~
+    
+    Host dn1
+    	HostName ~
+    	User ~
+    	IdentifyFile ~
+    
+    Host dn2
+    	HostName ~
+    	User ~
+    	IdentifyFile ~
+    
+    Host dn3
+    	HostName ~
+    	User ~
+    	IdentifyFile ~
+    ```
+    
+2. nn1 서버로 접속하여 /etc/hosts 파일을 변경해줍니다.
+    
+    ```bash
+    #다른 인스턴스와 연결할 수 있도록 설정을 추가해줍니다.
+    #여기서는 내부 IP 주소를 추가해줍니다.
+    127.0.0.1 localhost
+    #nn1
+    10.178.0.2 nn1
+    #nn2
+    10.178.0.3 nn2
+    #dn1
+    10.178.0.4 dn1
+    #dn2
+    10.178.0.5 dn2
+    #dn3
+    10.178.0.6 dn3
+    
+    #다 입력 후 저장합니다.
+    
+    #host 이름이 내부 ip 여서 확인이 힘들기 때문에 host 이름을 변경해줍니다.
+    #GCP 는 자동으로 host 이름이 내부 ip 가 아니라 이름으로 되어 있는거 같습니다.
+    $ sudo hostnamectl set-hostname nn1
+    
+    ```
+    
+3. nn1 에 /etc/hosts 에 있는 설정 값들을 nn2, dn1, dn2. dn3 에 복사를 해줍니다.
+    
+    ```bash
+    #CLI 로 한번에 복사해줍니다.
+    cat /etc/hosts | ssh nn2 "sudo sh -c 'cat >/etc/hosts'"
+    cat /etc/hosts | ssh dn1 "sudo sh -c 'cat >/etc/hosts'"
+    cat /etc/hosts | ssh dn2 "sudo sh -c 'cat >/etc/hosts'"
+    cat /etc/hosts | ssh dn3 "sudo sh -c 'cat >/etc/hosts'"
+    
+    ```
+    
+4. nn1 에 HADOOP_HOME 홈디렉토리 밑에 hdfs-site.xml 을 nn2 에 복사해줍니다.

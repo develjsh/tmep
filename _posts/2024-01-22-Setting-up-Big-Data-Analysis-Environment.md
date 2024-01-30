@@ -600,3 +600,8 @@ permalink: /blog/adding-categories-tags-in-posts/
     ```
     
 4. nn1 에 HADOOP_HOME 홈디렉토리 밑에 hdfs-site.xml 을 nn2 에 복사해줍니다.
+
+    ```bash
+    cat $HADOOP_HOME/etc/hadoop/hdfs-site.xml | ssh nn2 "sudo sh -c 'cat >$HADOOP_HOME/etc/hadoop/hdfs-site.xml'"
+    
+    ```

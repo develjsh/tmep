@@ -603,5 +603,64 @@ permalink: /blog/adding-categories-tags-in-posts/
 
     ```bash
     cat $HADOOP_HOME/etc/hadoop/hdfs-site.xml | ssh nn2 "sudo sh -c 'cat >$HADOOP_HOME/etc/hadoop/hdfs-site.xml'"
+
+    ```
+
+---
+
+## 8강. Zookeeper 클러스터 실행
+
+1. nn2 와 dn1 에 myid 파일을 편집해줍니다.
+    
+    ```bash
+    #myid 파일을 열어줍니다.
+    $ sudo vi /usr/local/zookeeper/data/myid
+    
+    #nn2 는 2, dn1 은 3으로 바꿔줍니다.
+    ```
+    
+2. $ZOOKEEPER_HOME/bin/zookeeper.sh 라는  쉘 파일을 실행해줍니다.
+    
+    ```bash
+    $ sudo $ZOOKEEPER_HOME/bin/zkServer.sh start
+    ```
+    
+3. zookeeper 가 잘 실행되었는지 확인합니다.
+    
+    ```bash
+    $ sudo $ZOOKEEPER_HOME/bin/zkServer.sh status
+    
+    #Leader 와 follower 를 확인할 수 있습니다.
+    #Leader 선택은 랜덤입니다.
+    ```
+    
+4. nn1 에서만 zkfc 라는 명령으를 통해 hdfs 를 초기화 해줍니다.
+    
+    ```bash
+    $ hdfs zkfc -formatZK
+    
+    #초기화 되었는지 확인합니다.
+    $ cd /usr/local/zookeeper
+    $ ./bin/zkCli.sh
+    
+    #쉘이 실행되면 입력 할 수 있습니다
+    ls /hadoop-ha
+    #설정했던 하둡 클러스터 이름이 나오면 잘 실행된것입니다.
+    
+    #종료합니다.
+    $ quit
+    ```
+    
+    **Trouble
+    
+    - ERROR: Unable to create /usr/local/hadoop/logs. Aborting
+        - Solution: sudo chmod 777 -R /usr/local/hadoop
+5. journalnode 를 실행해줍니다.
+    
+    ```bash
+    $ hdfs --daemon start journalnode
+    
+    #journalnode 가 실행되었는지 확인합니다.
+    $ jps
     
     ```

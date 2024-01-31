@@ -9,7 +9,7 @@ tags: Arrays
 usemathjax: false
 permalink: /blog/adding-categories-tags-in-posts/
 ---
-# Two sum
+## Two sum
 
 ## Situation
 

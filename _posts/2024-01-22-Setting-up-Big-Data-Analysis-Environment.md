@@ -664,3 +664,113 @@ permalink: /blog/adding-categories-tags-in-posts/
     $ jps
     
     ```
+
+## 9강. Hadoop & Yarn 클러스터 실행
+
+1. nn1 서버에서 namenode 를 초기화해줍니다.
+    
+    ```bash
+    #nn1 에 접속 후 hadfs bin 폴더로 이동 후(ex. /uar/local/hadoop/bin) namenode 를 초기화 해줍니다.
+    $ hdfs namenode -format
+    ```
+    
+2. namdenode 실행해줍니다.
+    
+    ```bash
+    $ hdfs --daemon start namenode
+    
+    #jps 를 통해 실행되었는지 확인합니다.
+    $ jps
+    
+    7313 Jps
+    7334 NameNode
+    5381 JournalNode
+    
+    ```
+    
+3. standby 로 실행될 namenode 인 nn2 에서도 namenode 를 초기화해줍니다.
+    
+    ```bash
+    #nn2 에 접속 후 hadfs bin 폴더로 이동 후(ex. /uar/local/hadoop/bin) namenode 를 standby 로 실행해주니다.
+    $ hdfs namenode -bootstrapStandby
+    
+    #nn1 에서 ~/sbin 폴더로 이동 후 start-dfs.sh 를 실행해 줍니다.
+    $ start-dfs.sh
+    
+    #jps 로 확인합니다.
+    $ jps
+    
+    #새롭게 DFSKFailoverController 가 생긴 것을 확인할 수 있습니다.
+    
+    #nn2 에서도 DFSKFailoverController 가 생긴 것을 확인할 수 있습니다.
+    
+    ```
+    
+4. nn1 에서 Yarn 을 실행해줍니다. 
+    
+    ```bash
+    #~/hadoop/sbin 폴더에서 start-yarn.sh 을 실행해줍니다.
+    $ start-yarn.sh
+    
+    #실행 확인
+    $ jps
+    
+    # ResourceManager 가 실행된거 확인할 수 있습니다.
+    #nn2 에는 ResourceManager가 없고 dn1, dn2, dn3 dp DataNode 가 실행된것을 확인할 수 있습니다.
+    ```
+    
+    **Trouble
+    - dn 서버들의 logs 폴더에 권한이 없어 실패가 발생했습니다.
+    
+    -> sudo chmod 777 -R /usr/local/hadoop
+    
+    - dn2: WARNING: /usr/local/hadoop/logs does not exist. Creating.
+    
+    dn1: nodemanager is running as process 7965.  Stop it first and ensure /tmp/hadoop-sh.jung2-nodemanager.pid file is empty before retry.
+    
+    dn3: WARNING: /usr/local/hadoop/logs does not exist. Creating.
+    
+    dn1 에서 7965 가 실행되고 있다고 나옵니다. 그 이유는 dn2 와 dn3 가 logs 폴더에 권한이 없어 실패할 때 dn1 은 권한이 있어 실행이 성공했었기 때문입니다.
+    
+5. job histry 를 실행시켜 줍니다.
+    
+    ```bash
+    #nn1 에서 job history 를 실행해 줍니다.
+    $ mapred --daemon start historyserver
+    
+    #jps 로 JobHistoryServer 가 실행되었는지 확인합니다.
+    ```
+    
+6. nn1, nn2 에서 namenode 상태가 어떤지 확인합니다.
+    
+    ```bash
+    $ hdfs haadmin -getServiceState namenode1
+    ```
+    
+    **Trouble
+    
+    - $ hdfs haadmin -getServiceState namenode1 실행 했을 때 namenode1 의 결과가 active 가 아닌 standby 입니다.
+        
+        **[해결]**
+        
+        - nn1 터미널에서 $ hdfs haadmin -transitionToStandby namenode2 —forcemanual 를 입력하여 active를 standby 로 바꾸었습니다.
+7. Hadoop 이 정상적으로 실행되는지 확인합니다.
+    
+    ```bash
+    #nn1 서버에서만 실행합니다.
+    $ hdfs dfs -mkdir /test
+    $ hdfs dfs -ls /
+    $ hdfs dfs -put /usr/local/hadoop/LICENSE.txt /test/
+    $ hdfs dfs -ls /test/
+    $ yarn jar /usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-example-3.2.4.jar wordcount hdfs:///test/LICENSE.txt /test/output
+    
+    #결과 확인
+    $ hdfs dfs -text /test/output/*
+    
+    setw -g mode-keys vi 
+    bind -t vi-copy 'v' begin-selection
+    bind -t vi-copy 'y' copy-selection
+    bind C-c run "tmux save-buffer - | xclip -i -sel clipboard"
+    bind C-v run "tmux set-buffer \"$(xclip -o -sel clipboard)\"; tmux paste-buffer"
+    
+    ```

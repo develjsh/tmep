@@ -45,8 +45,10 @@ class Solution:
 
 ### Result
 
-Runtime: 453 ms; Beats 48.86%<br/>
-Memory: 14.10 MB; Beats 90.74%<br/>
+Runtime: 453 ms; Beats 48.86%
+
+Memory: 14.10 MB; Beats 90.74%
+
 
 ### 더 나은 방법
 
@@ -76,4 +78,5 @@ Memory: 14.10 MB; Beats 90.74%<br/>
     ```
 
     Runtime: 52 ms; Beats 96.54%
+    
     Memory: 18.67 MB; Beats 9.71%

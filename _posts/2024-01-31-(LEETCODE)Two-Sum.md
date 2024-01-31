@@ -11,7 +11,8 @@ permalink: /blog/adding-categories-tags-in-posts/
 ---
 ## Two sum
 
-## Situation
+
+### Situation
 
 Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.
 
@@ -19,11 +20,12 @@ You may assume that each input would have ***exactly* one solution**, and you 
 
 You can return the answer in any order.
 
-## Task
+### Task
 
 두 개의 값이 합이 target 이 되었을 때 그 값들의 index 를 배열로 넘기세요.
 
-## Action
+
+### Action
 
 이중 for 문 을 사용했습니다.
 
@@ -40,13 +42,13 @@ class Solution:
                     return [i, i + j + 1]
 ```
 
-## Result
 
-Runtime: 453 ms; Beats 48.86%
-Memory: 14.10 MB; Beats 90.74%
+### Result
 
+Runtime: 453 ms; Beats 48.86%<br/>
+Memory: 14.10 MB; Beats 90.74%<br/>
 
-## 더 나은 방법
+### 더 나은 방법
 
 1. 해쉬 맵
     
@@ -59,16 +61,16 @@ Memory: 14.10 MB; Beats 90.74%
         def twoSum(self, nums: List[int], target: int) -> List[int]:
             num_dict = {}  # 해시 맵을 저장할 딕셔너리
     
-            for i, num in enumerate(nums):
                 complement = target - num  # 현재 숫자와 더해져서 target이 되어야 하는 수
     
+            for i, num in enumerate(nums): 
                 # 딕셔너리에서 더해져서 target이 되어야 하는 수가 있는지 확인
                 if complement in num_dict:
                     return [num_dict[complement], i]
                 
                 # 딕셔너리에 현재 숫자와 인덱스를 저장
-                num_dict[num] = i
     
+                num_dict[num] = i
             # 만약 문제에서 보장된 답이 있다면 여기까지 도달하지 않음
             return []  # 보장된 답이 없을 경우 빈 리스트 반환
     ```

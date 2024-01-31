@@ -11,7 +11,6 @@ permalink: /blog/adding-categories-tags-in-posts/
 ---
 ## Two sum
 
-
 ### Situation
 
 Given an array of integers `nums` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.
@@ -23,7 +22,6 @@ You can return the answer in any order.
 ### Task
 
 두 개의 값이 합이 target 이 되었을 때 그 값들의 index 를 배열로 넘기세요.
-
 
 ### Action
 
@@ -42,13 +40,11 @@ class Solution:
                     return [i, i + j + 1]
 ```
 
-
 ### Result
 
 Runtime: 453 ms; Beats 48.86%
 
 Memory: 14.10 MB; Beats 90.74%
-
 
 ### 더 나은 방법
 
@@ -78,5 +74,5 @@ Memory: 14.10 MB; Beats 90.74%
     ```
 
     Runtime: 52 ms; Beats 96.54%
-    
+
     Memory: 18.67 MB; Beats 9.71%

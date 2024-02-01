@@ -4,7 +4,7 @@ title:  "Setting up Big Data Analysis Environment"
 summary: "Learn how to set up big data analysis environment"
 author: seunghwan
 date: '2024-01-22 00:00:00 +0530'
-category: ['big_data', 'hadoop', 'spark']
+category: ['big-data', 'hadoop', 'spark']
 tags: big_data
 #thumbnail: /assets/img/posts/code.jpg
 usemathjax: false

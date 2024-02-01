@@ -774,3 +774,105 @@ permalink: /blog/adding-categories-tags-in-posts/
     bind C-v run "tmux set-buffer \"$(xclip -o -sel clipboard)\"; tmux paste-buffer"
     
     ```
+
+## 10강. Spark 클러스터 실행 및 PySpark 예제 실행
+
+1. Spark 클러스터 실행
+    
+    ```bash
+    #Spark 클러스터를 실행해줍니다.
+    $ $SPARK_HOME/sbin/start-all.sh
+    
+    #지금까지 실행한게 실행되고 있는지 확인하기 위해 모든 서버에서 jps 를 입력합니다.
+    #jps 입력후 나온 결과는 아래 사진과 같아야합니다.
+    ```
+    
+    **Trouble
+    
+    - dn2, dn3 에 DataNode 가 실행되어 있지 않아 수동으로 실행해줬습니다.
+        
+        **정말 수동으로 DataNode 실행한게 작동하고 있는지 확인해봐야합니다.
+        
+2. nn1 에서 Spark wordcount 예제를 실행해봅니다.
+    
+    ```bash
+    $ spark-submit --class org.apache.spark.examples.SparkPi \ #Java 에서 사용할 클래스 명을 설정해줍니다.
+     --master yarn \ #master 를 yarn 으로 설정해줍니다.
+    --deploy-mode cluster \ #애플리케이션을 동작시킬 모드를 설정해줍니다.
+    --driver-memory 512m --executor 512m --executor-cores 1 \ #Resource 자원의 용량을 설정해줍니다.
+    --$SPARK_HOME/examples/jars/spark-examples_2.12-3.4.2.jar 5 #해당 파일에 위치를 설정해줍니다.
+    
+    ```
+    
+3. 2 번 출력 결과를 확인해줍니다.
+    
+    *deploy mode 가 cluster 로 실행했기 때문에 출력 결과를 확인할 수 없습니다. 이유는 deploy mode 가 cluster 로 실행하면 yarn resource manager 가 해당 애플리케이션이 실행 가능한 worker node 를 찾아서 executor 드라이버가 실행하기 때문입니다. 실행 확인을 위해서는 cluster 가 아닌 client 로 실행해줘야 합니다. 그러면 해당 서버에 executor 가 실행이 됩니다.
+    
+4. PySpark 예제를 만들어서 실행해봅니다.
+    
+    ```bash
+    $ vi pyspark_ex.py
+    
+    #아래 내용 입력 후 저장합니다.
+    from pyspark import SparkContext, SparkConf
+    
+    conf = SparkConf()
+    conf.setMaster("yarn")
+    conf.setAppName("jsh")
+    sc = SparkContext(conf=conf)
+    
+    print("="*100, "\n")
+    print(sc)
+    print("="*100, "\n")
+    
+    #spark-submit 으로 테스트 예제를 실행해줍니다.
+    $ spark-submit --master yarn --deploy-mode cluster pyspark_ex.py
+    
+    #csv 파일을 다운받아 테스를 합니다.
+    #csv 파일은 https://www.bigdata-culture.kr/bigdata/user/data_market/detail.do?id=9d00dd80-4a54-11eb-af9a-4b03f0a582d6 에서 원하는 데이터를 다운로드 받습니다.
+    #현재 테스트는 KOBIS 박스오피스 영화정보 입니다.
+    
+    #scp 를 통해 파일은 nn1 서버로 전송합니다.
+    $ scp ./box-office.csv nn1:~/
+    
+    #hdfs 로 파일은 이동해줍니다.
+    $ hdfs dfs -put box-office.csv /test/
+    
+    #hdfs 에 들어갔는지 확인합니다.
+    $ hdfs dfs -ls /test/
+    
+    #파이썬 예제를 만듭 후 저장하고 나옵니다.
+    $ vi pyspark_ex2.py
+    
+    from pyspark.sql import SparkSession
+    
+    sc = SparkSession.builder \
+    .master("yarn)\
+    .appName("jsh")\
+    getOrCreate()
+    
+    df = sc.read.scv("hdfs:///test/box-office.csv", header=True)
+    
+    df.show()
+    
+    #파이썬 예제를 실행합니다.
+    $ spark-submit --deploy-mode client  pyspark_ex2.py
+    
+    ```
+    
+    **Trouble
+    
+    - df.show() 했을 때 한글이 깨져서 나옵니다.
+        **[시도]**
+        
+        - $ spark-submit --deploy-mode client --conf spark.yarn.appMasterEnv.LANG=ko_KR.UTF-8 pyspark_ex2.py
+            - 여전히 깨져서 나옵니다.
+        - utf-8 설정 코드를 .py 파일에 추가해줍니다.
+            
+            ```bash
+            import sys
+            import codecs
+            sys.stdout = codecs.getwriter('utf8')(sys.stdout)
+            ```
+            
+            - TypeError: write() argument must be str, nto bytes

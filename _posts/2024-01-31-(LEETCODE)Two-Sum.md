@@ -7,7 +7,7 @@ date: '2024-01-31 00:00:00 +0530'
 category: ['leetcode', 'code test']
 tags: Arrays
 usemathjax: false
-permalink: /blog/adding-categories-tags-in-posts/
+permalink: /blog/leetcode/two-sum/
 ---
 ## Two sum
 

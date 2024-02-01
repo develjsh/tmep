@@ -8,7 +8,7 @@ category: ['big_data', 'hadoop', 'spark']
 tags: big_data
 #thumbnail: /assets/img/posts/code.jpg
 usemathjax: false
-permalink: /blog/adding-categories-tags-in-posts/
+permalink: /blog/big-data/setting-up-big-data-analysis-environment/
 ---
 ## Setting up Big Data Analysis Environment
 

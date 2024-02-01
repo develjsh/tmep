@@ -7,7 +7,7 @@ date: '2024-02-01 00:00:00 +0530'
 category: ['leetcode', 'code test']
 tags: Arrays
 usemathjax: false
-permalink: /blog/adding-categories-tags-in-posts/
+permalink: /blog/leetcode/conver-sorted-array-to-binary-search-tree/
 ---
 ## Convert Sorted Array to Binary Search Tree
 

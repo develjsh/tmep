@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "(LEETCODE)Two sum"
-summary: "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target."
+title:  "(LEETCODE)Convert Sorted Array to Binary Search Tree"
+summary: "Given an integer array nums where the elements are sorted in ascending order, convert it to a height-balanced binary search tree."
 author: seunghwan
-date: '2024-01-31 00:00:00 +0530'
+date: '2024-02-01 00:00:00 +0530'
 category: ['leetcode', 'code test']
 tags: Arrays
 usemathjax: false

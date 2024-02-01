@@ -33,7 +33,7 @@ class Solution:
         return max(dp)
 ```
 
-# Result
+## Result
 
     Runtime: 524 ms; Beats 92.26%
 

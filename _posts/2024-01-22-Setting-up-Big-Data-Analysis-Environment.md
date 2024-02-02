@@ -876,3 +876,42 @@ permalink: /blog/big-data/setting-up-big-data-analysis-environment/
             ```
             
             - TypeError: write() argument must be str, nto bytes
+
+## 11강.  보안그룹 편집 및 WEB UI 확인
+
+1. 현재 서버에서 LISTENING 하는 port 를 확인합니다.
+    
+    ```bash
+    $ netstat -ntlp
+    (Not all processes could be identified, non-owned process info
+     will not be shown, you would have to be root to see it all.)
+    Active Internet connections (only servers)
+    Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+    tcp        0      0 10.178.0.2:50070        0.0.0.0:*               LISTEN      41995/java //Hadoop web ui
+    tcp        0      0 10.178.0.2:8088         0.0.0.0:*               LISTEN      42600/java //Yarn web ui
+    tcp        0      0 10.178.0.2:8033         0.0.0.0:*               LISTEN      42600/java
+    tcp        0      0 10.178.0.2:8032         0.0.0.0:*               LISTEN      42600/java
+    tcp        0      0 10.178.0.2:8019         0.0.0.0:*               LISTEN      42488/java
+    tcp        0      0 10.178.0.2:8020         0.0.0.0:*               LISTEN      41995/java
+    tcp        0      0 10.178.0.2:8031         0.0.0.0:*               LISTEN      42600/java
+    tcp        0      0 10.178.0.2:8030         0.0.0.0:*               LISTEN      42600/java
+    tcp        0      0 0.0.0.0:19888           0.0.0.0:*               LISTEN      12526/java
+    tcp        0      0 127.0.0.53:53           0.0.0.0:*               LISTEN      -
+    tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      -
+    tcp        0      0 0.0.0.0:8485            0.0.0.0:*               LISTEN      42253/java
+    tcp        0      0 0.0.0.0:8480            0.0.0.0:*               LISTEN      42253/java
+    tcp        0      0 0.0.0.0:10020           0.0.0.0:*               LISTEN      12526/java
+    tcp        0      0 0.0.0.0:10033           0.0.0.0:*               LISTEN      12526/java
+    tcp6       0      0 10.178.0.2:3888         :::*                    LISTEN      -
+    tcp6       0      0 :::8080                 :::*                    LISTEN      -
+    tcp6       0      0 :::2181                 :::*                    LISTEN      -
+    tcp6       0      0 :::44149                :::*                    LISTEN      -
+    tcp6       0      0 :::22                   :::*                    LISTEN      -
+    
+    ```
+    
+2. GCP 네트워크 보안에서 50070, 8088, 18080 포트를 열어줍니다.
+
+3. nn1, nn2 외부 ip 주소와 Hadoop 포트은 50070을 URL 에 입력하면 Hadoop web ui 를 확인할 수 있습니다.
+
+4. 8088과 18080 포트도 입력해서 들어가 봅니다.

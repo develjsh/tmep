@@ -21,7 +21,7 @@ Given two **0-indexed** integer arrays `nums1` and `nums2`, return *a list
 
 ## Task
 
-- [ ]  시간 복잡도를 생각해서 해결해야 합니다.
+- 시간 복잡도를 생각해서 해결해야 합니다.
 
 ## Action
 

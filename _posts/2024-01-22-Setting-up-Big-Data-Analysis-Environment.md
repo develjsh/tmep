@@ -915,3 +915,26 @@ permalink: /blog/big-data/setting-up-big-data-analysis-environment/
 3. nn1, nn2 외부 ip 주소와 Hadoop 포트은 50070을 URL 에 입력하면 Hadoop web ui 를 확인할 수 있습니다.
 
 4. 8088과 18080 포트도 입력해서 들어가 봅니다.
+
+
+## 12강. Hadoop FailOver test
+
+1. Hadoop FailOver test를 진행합니다.
+    
+    ```bash
+    #nn1 또는 nn2 서버 중 active 를 찾습니다.
+    $ hdfs haadmin -getServiceState namenode1
+    or
+    $ hdfs haadmin -getServiceState namenode2
+    
+    #active 한 서버에서 Namenode 를 죽입니다.
+    $ kill -9 NameNode
+    $ kill -9 <PID>
+    
+    #standby 였던 서버에 접속 후 상태를 확인합니다.
+    $ hdfs haadmin -getServiceState namenode1
+    or
+    $ hdfs haadmin -getServiceState namenode2
+    ```
+    
+2. Hadoop web ui  에 Overview 에서 active 인지 확인합니다.

@@ -37,7 +37,7 @@ class Solution:
         return False
 ```
     
-2. 중첩 for문을 사용하지 않고 최대한 시간 복잡도를 O(n)으로 유지할 수 있도록 코드를 작성했습니다.
+1. 중첩 for문을 사용하지 않고 최대한 시간 복잡도를 O(n)으로 유지할 수 있도록 코드를 작성했습니다.
     
 ```python
 class Solution:

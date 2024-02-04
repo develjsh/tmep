@@ -1066,3 +1066,115 @@ permalink: /blog/big-data/setting-up-big-data-analysis-environment/
     ```bash
     $ sudo chmod 777 cluster*
     ```
+
+## 14강. zeppelin 설치 및 PySpark 연동
+
+**zeppelin 1.8GB 용량을 사용합니다.
+
+1. nn1 서버로 접속합니다.
+2. wget 으로 zeppelin 을 설치해줍니다.
+    
+    ```python
+    # https://www.apache.org/dyn/closer.cgi/zeppelin/zeppelin-0.10.1/zeppelin-0.10.1-bin-all.tgz
+    
+    $ sudo wget https://dlcdn.apache.org/zeppelin/zeppelin-0.10.1/zeppelin-0.10.1-bin-all.tgz
+    
+    #다운로드 받은 것을 압축파일 해제해줍니다.
+    $ sudo tar -zvxf zeppelin-0.10.1-bin-all.tgz -C /usr/local
+    
+    #디렉토리 이름을 편한걸로 변경해줍니다.
+    $ sudo mv /usr/local/zeppelin-0.10.1-bin-all/ /usr/local/zeppelin
+    
+    #디렉토리 권한을 수정해줍니다.
+    $ sudo chown -R $USER:$USER /usr/local/zeppelin/
+    
+    #환결설정을 해줍니다.
+    $ sudo vi /etc/environment
+    
+    #PATH 에 추가해준 후 저장합니다.
+    PATH="~~~:/usr/local/zeepelin/bin"
+    
+    ZEPPELIN_HOME="/usr/local/zeppelin"
+    
+    #추가 설정을 해줍니다.
+    $ sudo echo 'export ZEPPELIN_HOME=/usr/local/zeppelin' >> ~/.bashrc
+    $ source ~/.bashrc
+    $ env | grep ZEPPELIN_HOME
+    
+    ```
+    
+    **Trouble
+    
+    - /etc/environment 파일을 수정 중  file system full? 라는 경고 메시지와 함께 수정할 수 없었습니다.
+        - 해당 디렉토리 용량이 부족해서 발생하는 에러입니다. 해당 디렉토리에 필요없는 파일을 삭제하면 정상적으로 작동합니다. 만약 에러가 발생해서 수정하던 파일에서 나가면 .swp 파일이 생성되었을 겁니다. 삭제해줍니다.
+        - 디스크별 용량 확인은 아래와 같습니다.
+            
+            ```python
+            #디스크별 용량 확인
+            $ df -h
+            
+            #특정 디렉토리 용량 확인
+            $ du -hs <folder>
+            
+            #현재 디렉토리에 있는 폴더 및 파일 용량 확인
+            $ du -hs *
+            
+            #현재 디렉토리에서 용량이 큰 순서대로 확인
+            $ du -h --max-depth=1 | sort -hr
+            
+            #디렉토리에 있는 모든 폴더들의 용량을 큰 순서대로 확인
+            $ sudo du -ah -max-depth=1 <pwd> | sort -hr
+            
+            ```
+            
+    - E212: Can't open file for writing 에러가 발생했습니다.
+        - 권한 문제이기 때문에 해당 파일을  열 때 sudo 권한으로 열어주면 됩니다.
+3. config  설정을 해줍니다.
+    
+    ```python
+    $ cd $ZEPPELIN_HOME/conf
+    $ cp zeppelin-site.xml.template zeppelin-site.xml
+    $ vi zeppelin-site.xml
+    
+    #zeppelin.server.addr 과 zeppelin.server.prot 를 수정해줍니다.
+    <property>
+      <name>zeppelin.server.addr</name>
+      <value>0.0.0.0</value>
+      <description>Server binding address</description>
+    </property>
+    
+    <property>
+      <name>zeppelin.server.port</name>
+      <value>8011</value>
+      <description>Server port.</description>
+    </property>
+    
+    #zeppelin-env.sh 을 수정해줍니다.
+    $ cp zeppelin-env.sh.template zeppelin-env.sh
+    $ vi zeppelin-env.sh
+    
+    #가장 하단에 추가해줍니다.
+    export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+    export HADOOP_HOME=/usr/local/hadoop
+    export YARN_CONF_DIR=$HADOOP_HOME/etc/hadoop
+    export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
+    export SPARK_HOME=/usr/local/spark
+    export SPARK_MASTER=yarn
+    export ZEPPELIN_PORT=8011
+    export PYTHONPATH=/usr/bin/python3
+    export PYSPARK_PYTHON=/usr/bin/python3
+    export PYSPARK_DRIVER_PYTHON=/usr/bin/python3
+    
+    ```
+    
+4. zeppelin 을 실행해줍니다.
+    
+    ```python
+    $ /usr/local/zeppelin/bin/zeppelin-daemon.sh start
+    ```
+    
+    **Trouble
+    
+    - log dir 과 pid dir 이 존재하지 않는다고 나오는데 실행이 됩니다. 실제로도 해당 디렉토리가 있는데도 로그가 나옵니다.
+    - start 한 후 몇 초 뒤에 죽습니다.
+        - [zeppelin-env.sh](http://zeppelin-env.sh) 에 JAVA_HOME 디렉토리 설정이 잘못되어 있었습니다.

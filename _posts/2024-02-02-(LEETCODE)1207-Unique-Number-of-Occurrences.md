@@ -1,11 +1,11 @@
 ---
 layout: post
 title:  "(LEETCODE)1207. Unique Number of Occurrences"
-summary: "Given an array of integers arr, return true if the number of occurrences of each value in the array is unique or false otherwise."
+summary: "Given two strings, word1 and word2, return true if word1 and word2 are close, and false otherwise."
 author: seunghwan
 date: '2024-02-02 00:00:00 +0530'
 category: ['leetcode', 'code test']
-tags: Arrays
+tags: Hash Table
 usemathjax: false
 permalink: /blog/leetcode/1207-unique-number-of-occurrences/
 ---
@@ -60,6 +60,6 @@ Given an array of integers `arr`, return `true` *if the number of occurrences
     
 
 ## Result
-    Runtime: 52 ms; Beats 96.54%
+    Runtime: 137 ms; Beats 50.004%
 
-    Memory: 18.67 MB; Beats 9.71%
+    Memory: 17.60 MB; Beats 99.71%

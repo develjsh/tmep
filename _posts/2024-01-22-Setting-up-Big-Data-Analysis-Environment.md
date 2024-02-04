@@ -938,3 +938,131 @@ permalink: /blog/big-data/setting-up-big-data-analysis-environment/
     ```
     
 2. Hadoop web ui  에 Overview 에서 active 인지 확인합니다.
+
+## 13강. 클러스터 실행 스크립트 생성 및 테스트
+
+1. 모두 시작하는 스크립트를 작성합니다.
+    
+    ```bash
+    $ vi cluster-start-all.sh
+    
+    #서비스를 최초로 실행할 때는 zookeeper, Hadoop, Yarn, JobHisotry, Spark 순서대로 실행해줘야 합니다.
+    #1. zookeeper 는 nn1, nn2, dn1 서버에서 각각 실행해줍니다.
+    #nn1 zookeeper Run
+    sudo /usr/local/zookeeper/bin/zkServer.sh start
+    #jps 로 확인했을 때 아무 것도 새로 생기지 않았습니다.
+    
+    #nn2 zookeeper Run
+    ssh  nn2 "sudo /usr/local/zookeeper/bin/zkServer.sh start"
+    #jps 로 확인했을 때 아무 것도 새로 생기지 않았습니다.
+    
+    #dn1 zookerper Run
+    ssh  dn1 "sudo /usr/local/zookeeper/bin/zkServer.sh start"
+    #jps 로 확인했을 때 아무 것도 새로 생기지 않았습니다.
+    
+    #2. Hadoop 을 실행해줍니다.
+    #Haddop Run
+    $HADOOP_HOME/sbin/start-all.sh
+    
+    #$HADOOP_HOME/sbin/start-all.sh 실행하면 Haddoop 의 namenode, datanode, yarn의 resouce mager, node manager 가 실행됩니다.
+    
+    #3. History Manager 를 실행해줍니다.
+    #Jobhisotrymanager Run
+    mapred --daemon start historyserver
+    
+    #4. Spark 를 실행해줍니다.
+    #$SPARK_HOME/sbin/start-all.sh 을 실행해주면 spark masster 와 spark worker 가 모두 실행됩니다.
+    #Spark Run
+    $SPARK_HOME/sbin/start-all.sh
+    
+    ```
+    
+2. 모두 종료하는 스크립틀르 작성합니다.
+    
+    ```bash
+    #모두 시작하는 스크립트 순서와 반대로 작서앻주면 됩니다.
+    
+    #Spark stop
+    $SPARK_HOME/sbin/stop-all.sh
+    
+    #Jobhisotrymanager stop
+    $ mapred --daemon stop historyserver
+    
+    #Haddop stop
+    $HADOOP_HOME/s
+    ```
+    
+3. 스크립트에 작업 권한을 바꿔줍니다.
+    
+    ```bash
+    $ sudo chmod 777 cluster*
+    ```
+    
+4. [cluster-stop-all.sh](http://cluster-stop-all.sh) 스크립트를 실행합니다.
+    
+    ```bash
+    $ ./cluster-stop-all.sh
+    ```
+    
+    ```bash
+    #종료 되었는지 확인합니다. 종료가 잘되었으면 Jps 만 남아있어야 합니다.
+    $ jps
+    ```
+    
+5. [cluster-start-all.sh](http://cluster-start-all.sh) 스크립티를 실행합니다.
+    
+    ```bash
+    $ ./cluster-start-all.sh
+    ```
+    
+    ```bash
+    #jps 실행하면 아래와 같이 보여야합니다.
+    90467 DFSZKFailoverController
+    89972 NameNode
+    90233 JournalNode
+    90969 Master
+    91225 Jps
+    90923 JobHistoryServer
+    90605 ResourceManager
+    ```
+    
+6. 재시작하는 스크립트를 작성합니다.
+    
+    ```bash
+    #스크립트 파일을 만듭니다.
+    $ vi cluster-restart-all.sh
+    
+    #Spark stop
+    $SPARK_HOME/sbin/stop-all.sh
+    
+    #Jobhisotrymanager stop
+    mapred --daemon stop historyserver
+    
+    #Haddop stop
+    $HADOOP_HOME/sbin/stop-all.sh
+    
+    #nn1 zookeeper Run
+    sudo /usr/local/zookeeper/bin/zkServer.sh start
+    
+    #nn2 zookeeper Run
+    ssh  nn2 "sudo /usr/local/zookeeper/bin/zkServer.sh start"
+    
+    #dn1 zookerper Run
+    ssh  dn1 "sudo /usr/local/zookeeper/bin/zkServer.sh start"
+    
+    #Haddop Run
+    $HADOOP_HOME/sbin/start-all.sh
+    
+    #Jobhisotrymanager Run
+    mapred --daemon start historyserver
+    
+    #Spark Run
+    $SPARK_HOME/sbin/start-all.sh
+    
+    ```
+    
+7. 스크립트에 작업 권한을 바꿔줍니다.
+    
+    ```bash
+    $ sudo chmod 777 cluster*
+    ```

@@ -7,7 +7,7 @@ date: '2024-02-02 00:00:00 +0530'
 category: ['leetcode', 'code test']
 tags: Hash Table
 usemathjax: false
-permalink: /blog/leetcode/1207-unique-number-of-occurrences/
+permalink: /blog/leetcode/Unique-Number-of-Occurrences/
 ---
 ## 1207. Unique Number of Occurrences
 
@@ -61,6 +61,6 @@ class Solution:
     
 
 ### Result
-    Runtime: 137 ms; Beats 50.004%
+Runtime: 137 ms; Beats 50.004%
 
-    Memory: 17.60 MB; Beats 99.71%
+Memory: 17.60 MB; Beats 99.71%

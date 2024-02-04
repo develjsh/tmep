@@ -7,7 +7,7 @@ date: '2024-02-03 00:00:00 +0530'
 category: ['leetcode', 'code test']
 tags: Arrays
 usemathjax: false
-permalink: /blog/leetcode/1657-Determine-if-Two-Strings-Are-Close/
+permalink: /blog/leetcode/Determine-if-Two-Strings-Are-Close/
 ---
 ## 1657. Determine if Two Strings Are Close
 ### Situation
@@ -30,7 +30,6 @@ Given two strings, `word1` and `word2`, return `true` *if* `word1` *and*�
 ### Action
 
 - 문제 이해하기.
-    - 문제의 핵심은 word1 과 word2 의
 
 1. ChatGPT 정답.
     

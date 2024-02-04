@@ -31,14 +31,14 @@ You can return the answer in any order.
 
 시간 복잡도를 계산해 보면, 이 코드의 중첩된 반복문이 사용되고 있습니다. 외부 반복문은 배열 nums의 각 요소에 대해 순회하고, 내부 반복문은 해당 요소 이후의 모든 요소와의 합을 계산합니다. 따라서 이 코드의 시간 복잡도는 O(n^2)입니다. 여기서 n은 배열 nums의 길이입니다.
 
-```python
-class Solution:
-    def twoSum(self, nums: List[int], target: int) -> List[int]:
-        for i, num in enumerate(nums):
-            for j, num2 in enumerate(nums[i + 1:len(nums)]):
-                if (num + num2) == target:
-                    return [i, i + j + 1]
-```
+    ```python
+    class Solution:
+        def twoSum(self, nums: List[int], target: int) -> List[int]:
+            for i, num in enumerate(nums):
+                for j, num2 in enumerate(nums[i + 1:len(nums)]):
+                    if (num + num2) == target:
+                        return [i, i + j + 1]
+    ```
 
 ### Result
 

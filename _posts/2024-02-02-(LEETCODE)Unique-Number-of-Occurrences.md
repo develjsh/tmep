@@ -22,7 +22,7 @@ Given an array of integers `arr`, return `true` *if the number of occurrences
 ### Action
 
 1. 처음에 [] 배열에 max(arr) + 값에 크기에 0 을 넣고 나중에 len() 로 비교할려고 했지만 값에 음수 값이 여러개 들어 있으면 실패합니다.
-    
+
 ```python
 class Solution:
     def uniqueOccurrences(self, arr: List[int]) -> bool:

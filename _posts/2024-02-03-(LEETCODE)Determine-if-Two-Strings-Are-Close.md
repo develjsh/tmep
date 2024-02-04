@@ -30,8 +30,6 @@ Given two strings, `word1` and `word2`, return `true` *if* `word1` *and*�
 ### Action
 
 - 문제 이해하기.
-
-1. ChatGPT 정답.
     
 ```python
 
@@ -55,9 +53,7 @@ class Solution:
 
         return True
 ```
-    
-2. 다른 사람 코드.
-    
+        
 ```python
 
 class Solution:

@@ -1172,9 +1172,3 @@ permalink: /blog/big-data/setting-up-big-data-analysis-environment/
     ```python
     $ /usr/local/zeppelin/bin/zeppelin-daemon.sh start
     ```
-    
-    **Trouble
-    
-    - log dir 과 pid dir 이 존재하지 않는다고 나오는데 실행이 됩니다. 실제로도 해당 디렉토리가 있는데도 로그가 나옵니다.
-    - start 한 후 몇 초 뒤에 죽습니다.
-        - [zeppelin-env.sh](http://zeppelin-env.sh) 에 JAVA_HOME 디렉토리 설정이 잘못되어 있었습니다.

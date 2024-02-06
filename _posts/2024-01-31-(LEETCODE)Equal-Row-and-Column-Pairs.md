@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "(LEETCODE)Equal Row and Column Pairs"
+title:  "(LEETCODE)2352. Equal Row and Column Pairs"
 summary: "Given a 0-indexed n x n integer matrix grid, return the number of pairs (ri, cj) such that row ri and column cj are equal."
 author: seunghwan
 date: '2024-02-06 00:00:00 +0530'

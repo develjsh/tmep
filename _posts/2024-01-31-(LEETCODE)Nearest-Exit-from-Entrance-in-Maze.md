@@ -113,7 +113,7 @@ return -1
 ```
     
 
-# Result
+### Result
 
 1. 다른 사람 코드.
     - 시간 복잡도: O(rows * cols)

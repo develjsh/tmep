@@ -1,13 +1,13 @@
 ---
 layout: post
-title:  "(LEETCODE)Maximum Subarray"
+title:  "(LEETCODE)53. Maximum Subarray"
 summary: "Given an integer array nums, find the subarray with the largest sum, and return its sum."
 author: seunghwan
 date: '2024-01-31 00:00:00 +0530'
 category: ['leetcode', 'code test']
 tags: Arrays
 usemathjax: false
-permalink: /blog/leetcode/maximum-subarry/
+permalink: /blog/leetcode/Maximum-Subarry/
 ---
 ## Maximum Subarray
 

@@ -57,8 +57,7 @@ Find the node in the BST that the node's value equals `val` and return the sub
             return bst(root)
     ```
     
-
-# Result
+### Result
 
 1. 좋은 결과지만 문제 점이 있었습니다.
 

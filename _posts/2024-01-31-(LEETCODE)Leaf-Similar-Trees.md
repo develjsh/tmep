@@ -7,7 +7,7 @@ date: '2024-02-08 00:00:00 +0530'
 category: ['leetcode', 'code test']
 tags: Depth First Search
 usemathjax: false
-permalink: /blog/leetcode/Search-in-a-Binary-Search-Tree/
+permalink: /blog/leetcode/Leaf-Similar-Trees/
 ---
 ## 872. Leaf-Similar Trees
 
@@ -55,6 +55,6 @@ Return `true` if and only if the two given trees with head nodes `root1` and
             return leaves1 == leaves2
     ```
 
-# Result
+### Result
 
 1. The time complexity of the **`leafSimilar`** function is O(N + M), where N is the number of nodes in the first tree (root1) and M is the number of nodes in the second tree (root2). This is because the function performs a depth-first traversal of both trees, visiting each node once.

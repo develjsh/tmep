@@ -59,14 +59,14 @@ class Solution:
         return result
 ```
 
-# Result
+### Result
 
 시간 복잡도는 O(n^2)입니다.
 
 Runtime: 381 ms
 Memory: 52.88 MB
 
-# Better way
+### Better way
 
 ```python
 # Definition for singly-linked list.

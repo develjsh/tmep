@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "(LEETCODE)1071. Greatest Common Divisor of Strings
+title:  "(LEETCODE)1071. Greatest Common Divisor of Strings"
 summary: "Given two strings str1 and str2, return the largest string x such that x divides both str1 and str2."
 author: seunghwan
 date: '2024-02-14 00:00:00 +0530'

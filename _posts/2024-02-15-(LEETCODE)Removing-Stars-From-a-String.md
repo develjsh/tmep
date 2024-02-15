@@ -32,7 +32,7 @@ Return *the string after **all** stars have been removed*.
 - stack = [] 객체 생성.
 - str 값을 list 형태로 변환.
 - for 문 돌면서 * 값 찾기
-    - * 찾으면 .pop() 을 통해 그 전에 넣은 값 제거.
+    - 찾으면 .pop() 을 통해 그 전에 넣은 값 제거.
     - 못찾으면 stack 객체에 넣기
 - stack 에 담긴 값들을 문자열로 만든후 return.
 

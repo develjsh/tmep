@@ -57,8 +57,6 @@ input 은 [-2,2,-1,-2] 이고 정답은 [-2] 입니다.
 
 문제는 asteroids 비교를 뒤에서 부터 했던 것이 문제였습니다. 앞에서부터 처리하도록 로직을 수정하면 해결됩니다.
 
-**[정답 코드]**
-
 ```python
 class Solution:
     def asteroidCollision(self, asteroids: List[int]) -> List[int]:

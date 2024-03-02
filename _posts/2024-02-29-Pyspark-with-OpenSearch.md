@@ -43,3 +43,35 @@ $ pip3 list
             ```bash
             $ pip3 install opensearch-py
             ```
+
+## OpenSearch에 데이터 넣기
+
+[목표]
+
+- bank account 데이터를 다운로드 받아 넣습니다.
+
+[방법]
+
+1. wget을 통해 account 데이터를 다운로드 받아 압축을 풀어줍니다.
+    
+    ```bash
+    $ wget https://download.elastic.co/demos/kibana/gettingstarted/accounts.zip
+    $ unzip accounts.zip
+    ```
+    
+2. 다운로드 받은 파일은 opensearch에 넣어줍니다.
+    
+    ```bash
+    # curl을 사용해줍니다.
+    # bash 디렉토리가 account.json과 같은 디렉토리에 있도록 해줍니다. 
+    $ curl -XPOST \
+        -H 'Content-Type: application/x-ndjson' \
+        'http://localhost:9200/bank/_bulk?pretty' \
+        --data-binary "@accounts.json"
+    ```
+    
+3. 데이터가 잘 넣어졌는지 확인합니다.
+    
+    ```bash
+    $ curl -XGET 'http://localhost:9200/bank/_search?pretty&size=0'
+    ```

@@ -33,3 +33,13 @@ $ python3 -V
 # opensearch-py version: 2.4.2
 $ pip3 list
 ```
+
+## Mac에서 OpenSearch 설치하기
+
+1. OpenSearch에서 데이터 가져오는 것은 파이썬 라이브러리 중 opensearchpy를 사용했습니다.
+    1. 설치 방법
+        1. pip3를 통해서 설치했습니다.
+            
+            ```bash
+            $ pip3 install opensearch-py
+            ```

@@ -127,3 +127,27 @@ $ pip3 list
         }
     )
     ```
+
+## python dict 객체를 DataFrame으로 변경하기
+
+- dict 객체는 vl 객체에 담겨진것을 가정으로 진행하겠습니다.
+- pyspark를 사용합니다.
+
+1. pyspark와 SparkSession를 불러옵니다.
+    
+    ```python
+    import pyspark
+    from pyspark.sql import SparkSession
+    ```
+    
+2. SparkSession 생성 후 spark createDataFrame() 함수를 통해 DataFrame을 생성해줍니다.
+    
+    ```python
+    spark = SparkSession.builder.appName('sparkdf').getOrCreate() 
+    
+    # DataFrame을 생성해줍니다.
+    dataframe = spark.createDataFrame(hits_with_source_only) 
+    
+    # 만들어진 DataFrame을 확인합니다.
+    dataframe.show()
+    ```

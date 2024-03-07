@@ -151,5 +151,3 @@ $ pip3 list
     # 만들어진 DataFrame을 확인합니다.
     dataframe.show()
     ```
-
-    

@@ -104,3 +104,11 @@ Kafka는 다음과 같은 목적으로 주제 및 파티션을 생성합니다.
 - Coordinator
     - 다수의 Broker 중 하나의 Broker가 수행하는 역할입니다.
     - Consumer 그룹의 상태를 확인하고 Partition과 Consumer을 매칭하여 분배해주며, 만약 Consumer가 Consumer 그룹에서 빠져 매칭이 끊기면 다른 Consumer와 Partition을 연결하여 연결이 끊기지 않도록 rebalance 작업을 해줍니다.
+
+
+## Confluent Kafka 설치하기 with Kubernetes
+
+* 현재 Mac m1에서 Linux vm을 쉽게 생성해서 사용할 수 있는 프로그램이 아직 준비되지 않아 Docker Desktop을 사용합니다.
+- 환경
+    - Mac m1
+    - Docker Desktop

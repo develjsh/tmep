@@ -15,6 +15,73 @@ Apache Kafka는 시작 또는 끝이 없는 스트리밍 이벤트 데이터나 
 
 * Producer/Consumber와 Publish/Subscribe을 같은 의미로 사용하고 있었습니다
 
+## Kafka 설치
+
+### Oracle Linux 8.6
+
+```bash
+# 다운로드
+$ dnf install java-17-openjdk java-17-openjdk-devel
+$ wget https://downloads.apache.org/kafka/3.5.2/kafka_2.13-3.5.2.tgz
+$ tar -xvzf ./kafka_2.13-3.5.2.tgz
+$ mv ./kafka_2.13-3.5.2 /usr/local/kafka
+
+# 서비스 등록
+$ vi /etc/systemd/system/zookeeper.service
+[Unit]
+Description=Apache Zookeeper server
+Documentation=http://zookeeper.apache.org
+Requires=network.target remote-fs.target
+After=network.target remote-fs.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/bash /usr/local/kafka/bin/zookeeper-server-start.sh /usr/local/kafka/config/zookeeper.properties
+ExecStop=/usr/bin/bash /usr/local/kafka/bin/zookeeper-server-stop.sh
+Restart=on-abnormal
+
+[Install]
+WantedBy=multi-user.target
+
+$  vi /etc/systemd/system/kafka.service
+[Unit]
+Description=Apache Kafka Server
+Documentation=http://kafka.apache.org/documentation.html
+Requires=zookeeper.service
+
+[Service]
+Type=simple
+Environment="JAVA_HOME=/usr/lib/jvm/jre-17-openjdk"
+ExecStart=/usr/bin/bash /usr/local/kafka/bin/kafka-server-start.sh /usr/local/kafka/config/server.properties
+ExecStop=/usr/bin/bash /usr/local/kafka/bin/kafka-server-stop.sh
+
+[Install]
+WantedBy=multi-user.target
+
+$ systemctl daemon-reload
+$ systemctl start zookeeper
+$ systemctl start kafka
+$ systemctl enable zookeeper
+$ systemctl enable kafka
+
+# 환경 설정
+$ vi /usr/local/kafka/config/zookeeper.properties
+$ vi /usr/local/kafka/config/server.properties
+
+# 방화벽 허용
+$ firewall-cmd --permanent --zone=public --add-port=9092/tcp
+$ firewall-cmd --permanent --zone=public --add-port=2181/tcp
+$ firewall-cmd --reload
+
+# 토픽 생성
+$ cd /usr/local/kafka/bin
+$ ./kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic event-pusher
+
+# 테스트
+$ /usr/local/kafka/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic event-pusher
+$ /usr/local/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic event-pusher --from-beginning
+```
+
 ## 작동 방식: Kafka vs. Redis 게시/구독
 
 Apache Kafka는 여러 애플리케이션이 서로 독립적으로 데이터를 스트리밍할 수 있게 해주는 이벤트 스트리밍 플랫폼입니다. *생산자* 및 *소비자*라고 하는 이러한 애플리케이션은 *주제*라고 하는 특정 데이터 파티션에 정보를 게시하고 구독합니다.
@@ -104,11 +171,3 @@ Kafka는 다음과 같은 목적으로 주제 및 파티션을 생성합니다.
 - Coordinator
     - 다수의 Broker 중 하나의 Broker가 수행하는 역할입니다.
     - Consumer 그룹의 상태를 확인하고 Partition과 Consumer을 매칭하여 분배해주며, 만약 Consumer가 Consumer 그룹에서 빠져 매칭이 끊기면 다른 Consumer와 Partition을 연결하여 연결이 끊기지 않도록 rebalance 작업을 해줍니다.
-
-
-## Confluent Kafka 설치하기 with Kubernetes
-
-* 현재 Mac m1에서 Linux vm을 쉽게 생성해서 사용할 수 있는 프로그램이 아직 준비되지 않아 Docker Desktop을 사용합니다.
-- 환경
-    - Mac m1
-    - Docker Desktop

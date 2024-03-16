@@ -19,68 +19,68 @@ Apache Kafka는 시작 또는 끝이 없는 스트리밍 이벤트 데이터나 
 
 ### Oracle Linux 8.6
 
-```bash
-# 다운로드
-$ dnf install java-17-openjdk java-17-openjdk-devel
-$ wget https://downloads.apache.org/kafka/3.5.2/kafka_2.13-3.5.2.tgz
-$ tar -xvzf ./kafka_2.13-3.5.2.tgz
-$ mv ./kafka_2.13-3.5.2 /usr/local/kafka
+    ```bash
+    # 다운로드
+    $ dnf install java-17-openjdk java-17-openjdk-devel
+    $ wget https://downloads.apache.org/kafka/3.5.2/kafka_2.13-3.5.2.tgz
+    $ tar -xvzf ./kafka_2.13-3.5.2.tgz
+    $ mv ./kafka_2.13-3.5.2 /usr/local/kafka
 
-# 서비스 등록
-$ vi /etc/systemd/system/zookeeper.service
-[Unit]
-Description=Apache Zookeeper server
-Documentation=http://zookeeper.apache.org
-Requires=network.target remote-fs.target
-After=network.target remote-fs.target
+    # 서비스 등록
+    $ vi /etc/systemd/system/zookeeper.service
+    [Unit]
+    Description=Apache Zookeeper server
+    Documentation=http://zookeeper.apache.org
+    Requires=network.target remote-fs.target
+    After=network.target remote-fs.target
 
-[Service]
-Type=simple
-ExecStart=/usr/bin/bash /usr/local/kafka/bin/zookeeper-server-start.sh /usr/local/kafka/config/zookeeper.properties
-ExecStop=/usr/bin/bash /usr/local/kafka/bin/zookeeper-server-stop.sh
-Restart=on-abnormal
+    [Service]
+    Type=simple
+    ExecStart=/usr/bin/bash /usr/local/kafka/bin/zookeeper-server-start.sh /usr/local/kafka/config/zookeeper.properties
+    ExecStop=/usr/bin/bash /usr/local/kafka/bin/zookeeper-server-stop.sh
+    Restart=on-abnormal
 
-[Install]
-WantedBy=multi-user.target
+    [Install]
+    WantedBy=multi-user.target
 
-$  vi /etc/systemd/system/kafka.service
-[Unit]
-Description=Apache Kafka Server
-Documentation=http://kafka.apache.org/documentation.html
-Requires=zookeeper.service
+    $  vi /etc/systemd/system/kafka.service
+    [Unit]
+    Description=Apache Kafka Server
+    Documentation=http://kafka.apache.org/documentation.html
+    Requires=zookeeper.service
 
-[Service]
-Type=simple
-Environment="JAVA_HOME=/usr/lib/jvm/jre-17-openjdk"
-ExecStart=/usr/bin/bash /usr/local/kafka/bin/kafka-server-start.sh /usr/local/kafka/config/server.properties
-ExecStop=/usr/bin/bash /usr/local/kafka/bin/kafka-server-stop.sh
+    [Service]
+    Type=simple
+    Environment="JAVA_HOME=/usr/lib/jvm/jre-17-openjdk"
+    ExecStart=/usr/bin/bash /usr/local/kafka/bin/kafka-server-start.sh /usr/local/kafka/config/server.properties
+    ExecStop=/usr/bin/bash /usr/local/kafka/bin/kafka-server-stop.sh
 
-[Install]
-WantedBy=multi-user.target
+    [Install]
+    WantedBy=multi-user.target
 
-$ systemctl daemon-reload
-$ systemctl start zookeeper
-$ systemctl start kafka
-$ systemctl enable zookeeper
-$ systemctl enable kafka
+    $ systemctl daemon-reload
+    $ systemctl start zookeeper
+    $ systemctl start kafka
+    $ systemctl enable zookeeper
+    $ systemctl enable kafka
 
-# 환경 설정
-$ vi /usr/local/kafka/config/zookeeper.properties
-$ vi /usr/local/kafka/config/server.properties
+    # 환경 설정
+    $ vi /usr/local/kafka/config/zookeeper.properties
+    $ vi /usr/local/kafka/config/server.properties
 
-# 방화벽 허용
-$ firewall-cmd --permanent --zone=public --add-port=9092/tcp
-$ firewall-cmd --permanent --zone=public --add-port=2181/tcp
-$ firewall-cmd --reload
+    # 방화벽 허용
+    $ firewall-cmd --permanent --zone=public --add-port=9092/tcp
+    $ firewall-cmd --permanent --zone=public --add-port=2181/tcp
+    $ firewall-cmd --reload
 
-# 토픽 생성
-$ cd /usr/local/kafka/bin
-$ ./kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic event-pusher
+    # 토픽 생성
+    $ cd /usr/local/kafka/bin
+    $ ./kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic event-pusher
 
-# 테스트
-$ /usr/local/kafka/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic event-pusher
-$ /usr/local/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic event-pusher --from-beginning
-```
+    # 테스트
+    $ /usr/local/kafka/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic event-pusher
+    $ /usr/local/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic event-pusher --from-beginning
+    ```
 
 ## 작동 방식: Kafka vs. Redis 게시/구독
 

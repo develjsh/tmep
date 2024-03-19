@@ -17,7 +17,7 @@ Apache Kafka는 시작 또는 끝이 없는 스트리밍 이벤트 데이터나 
 
 ## Kafka 설치
 
-### Oracle Linux 8.6
+### Oracle Linux 8.
 
     ```bash
     # 다운로드

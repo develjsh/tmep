@@ -26,3 +26,18 @@ permalink: /blog/kafka-lag-exporter/
     ```bash
     $ ./bin/kafka-lag-exporter -Dconfig.file=/Users/jsh/kafka/kafka-lag-exporter/application.conf
     ```
+
+## 수집 항목 중 일부
+
+```bash
+- kafka_consumergroup_group_sum_lag
+- kafka_consumergroup_group_offset
+- kafka_partition_latest_offset
+- kafka_consumergroup_group_lag
+- kafka_consumergroup_group_lag_seconds
+- kafka_consumergroup_group_topic_sum_lag
+- process_cpu_seconds_total
+- kafka_consumergroup_group_max_lag_seconds
+- kafka_partition_earliest_offset
+- kafka_consumergroup_group_max_lag
+```
